@@ -14,4 +14,4 @@
 //     /* verbose= */ false);
 // html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
-window.Telegram.WebApp.showScanQrPopup();
+window.Telegram.WebApp.showScanQrPopup('Scan qr code');
