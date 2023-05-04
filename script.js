@@ -1,17 +1,23 @@
-// function onScanSuccess(decodedText, decodedResult) {
-//     // handle the scanned code
-//     console.log(`Code matched = ${decodedText}`, decodedResult);
+function onScanSuccess(decodedText, decodedResult) {
+    window.Telegram.WebApp.sendData({ decodedText, decodedResult });
+}
+
+function onScanFailure(error) {
+    // handle scan failure
+    console.warn(`Code scan error = ${error}`);
+}
+
+let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: { width: 250, height: 250 } },
+    /* verbose= */ false);
+html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+// const scanQrPopupOptions = { text: 'Scan qr code' };
+
+// const handleCodeCatch = (text) => {
+//     window.Telegram.WebApp.sendData(text);
+//     return true;  // close scanQrPopup
 // }
 
-// function onScanFailure(error) {
-//     // handle scan failure
-//     console.warn(`Code scan error = ${error}`);
-// }
-
-// let html5QrcodeScanner = new Html5QrcodeScanner(
-//     "reader",
-//     { fps: 10, qrbox: { width: 250, height: 250 } },
-//     /* verbose= */ false);
-// html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-
-window.Telegram.WebApp.showScanQrPopup({ text: 'Scan qr code' });
+// window.Telegram.WebApp.showScanQrPopup(scanQrPopupOptions, handleCodeCatch);
