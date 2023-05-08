@@ -2,6 +2,7 @@
 
 function onScanSuccess(decodedText, decodedResult) {
     window.Telegram.WebApp.sendData({ decodedText, decodedResult });
+    alert(decodedText);
 }
 
 function onScanFailure(error) {
