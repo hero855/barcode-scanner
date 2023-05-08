@@ -1,20 +1,20 @@
 // html5-qrcode
 
+var resultContainer = document.getElementById('qr-reader-results');
+var lastResult, countResults = 0;
+
 function onScanSuccess(decodedText, decodedResult) {
-    window.Telegram.WebApp.sendData({ decodedText, decodedResult });
-    alert(decodedText);
+    if (decodedText !== lastResult) {
+        ++countResults;
+        lastResult = decodedText;
+        // Handle on success condition with the decoded message.
+        console.log(`Scan result ${decodedText}`, decodedResult);
+    }
 }
 
-function onScanFailure(error) {
-    // handle scan failure
-    console.warn(`Code scan error = ${error}`);
-}
-
-let html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader",
-    { fps: 10, qrbox: { width: 250, height: 250 } },
-    /* verbose= */ false);
-html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+var html5QrcodeScanner = new Html5QrcodeScanner(
+    "qr-reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess);
 
 // telegram native qr code api
 
