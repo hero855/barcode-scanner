@@ -1,3 +1,5 @@
+// html5-qrcode
+
 function onScanSuccess(decodedText, decodedResult) {
     window.Telegram.WebApp.sendData({ decodedText, decodedResult });
 }
@@ -12,6 +14,8 @@ let html5QrcodeScanner = new Html5QrcodeScanner(
     { fps: 10, qrbox: { width: 250, height: 250 } },
     /* verbose= */ false);
 html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+// telegram native qr code api
 
 // const scanQrPopupOptions = { text: 'Scan qr code' };
 
